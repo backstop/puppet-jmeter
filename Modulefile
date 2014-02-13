@@ -1,0 +1,10 @@
+name 'jmeter'
+version '1.0.0'
+source 'git://github.com/backstop/puppet-jmeter.git'
+author 'Backstop Solutions'
+license 'Apache 2.0'
+summary 'JMeter'
+description 'Installs the JMeter load testing tool'
+project_page 'http://github.com/backstop/puppet-jmeter'
+
+dependency 'maestrodev/wget', '>= 1.3.1'
