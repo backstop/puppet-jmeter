@@ -1,4 +1,4 @@
-name 'jmeter'
+name 'backstop-jmeter'
 version '1.0.0'
 source 'git://github.com/backstop/puppet-jmeter.git'
 author 'Backstop Solutions'
