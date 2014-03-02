@@ -9,11 +9,13 @@ class jmeter (
         tarball: {
             class { 'jmeter::install::tarball':
                 version => $version,
+                before  => Class['jmeter::install::plugins'],
             }
         }
         package: {
             class { 'jmeter::install::package':
                 version => $version,
+                before  => Class['jmeter::install::plugins'],
             }
         }
         default: {

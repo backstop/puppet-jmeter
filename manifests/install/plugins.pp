@@ -1,21 +1,21 @@
 class jmeter::install::plugins {
   # Currnetly only supports the standard plugin package.
 
-  $dest = $provider ? {
-    'tarball' => '/usr/local/jmeter/lib/ext',
-    'package' => '/usr/share/jmeter/lib/ext',
+  $dest = $::jmeter::provider ? {
+    'tarball' => '/usr/local/jmeter',
+    'package' => '/usr/share/jmeter',
   }
 
   wget::fetch { 'plugins':
-    source       => "http://jmeter-plugins.org/downloads/file/JMeterPlugins-Standard-${::jmeter::params::plugins_version}.zip",
-    destinations => "/root/JMeterPlugins-Standard-${::jmeter::params::plugins_version}.zip",
-    notify       => Exec['install-jmeter-plugins'],
+    source      => "http://jmeter-plugins.org/downloads/file/JMeterPlugins-Standard-${::jmeter::params::plugins_version}.zip",
+    destination => "/root/JMeterPlugins-Standard-${::jmeter::params::plugins_version}.zip",
+    notify      => Exec['install-jmeter-plugins'],
   }
 
   exec { 'install-jmeter-plugins':
-    command => "unzip -q -d JMeterPlugins JMeterPlugins-${::jmeter::params::plugins_version}.zip && mv JMeterPlugins/JMeterPlugins.jar ${dest}",
+    command => "unzip -q -o -d ${dest} JMeterPlugins-Standard-${::jmeter::params::plugins_version}.zip",
     cwd     => '/root',
-    creates => "${dest}/JMeterPlugins-Standard.jar",
+    creates => "${dest}/lib/ext/JMeterPlugins-Standard.jar",
     require => [Package['unzip']]
   }
 }

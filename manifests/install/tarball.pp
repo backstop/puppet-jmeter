@@ -19,8 +19,14 @@ class jmeter::install::tarball (
         ensure => directory,
     }
 
-    file { "/usr/local/jmeter":
-        ensure => "/usr/local/apache-jmeter-${version}",
+    file { '/usr/local/jmeter':
+        ensure => link,
+        target => "/usr/local/apache-jmeter-${version}",
+    }
+
+    file {'/usr/bin/jmeter':
+        ensure => present,
+        source => 'puppet:///modules/jmeter/jmeter',
     }
 
     class { 'jmeter::profile':
