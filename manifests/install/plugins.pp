@@ -1,4 +1,4 @@
-class jmeter::plugins {
+class jmeter::install::plugins {
   # Currnetly only supports the standard plugin package.
 
   $dest = $provider ? {
@@ -7,16 +7,17 @@ class jmeter::plugins {
   }
 
   if $jmeter_plugins_install == True {
-    exec { 'download-jmeter-plugins':
-      command => "wget -P /root http://jmeter-plugins.org/downloads/file/JMeterPlugins-Standard-${::jmeter::params::plugins_version}.zip",
-      creates => '/root/JMeterPlugins-${::jmeter::params::plugins_version}.zip'
+    wget::fetch { 'plugins':
+      source       => "http://jmeter-plugins.org/downloads/file/JMeterPlugins-Standard-${::jmeter::params::plugins_version}.zip",
+      destinations => "/root/JMeterPlugins-Standard-${::jmeter::params::plugins_version}.zip",
+      notify       => Exec['install-jmeter-plugins'],
     }
 
     exec { 'install-jmeter-plugins':
       command => "unzip -q -d JMeterPlugins JMeterPlugins-${::jmeter::params::plugins_version}.zip && mv JMeterPlugins/JMeterPlugins.jar ${dest}",
       cwd     => '/root',
       creates => "${dest}/JMeterPlugins-Standard.jar",
-      require => [Package['unzip'], Exec['install-jmeter'], Exec['download-jmeter-plugins']],
+      require => [Package['unzip']]
     }
   }
 }

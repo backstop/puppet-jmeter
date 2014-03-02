@@ -20,4 +20,8 @@ class jmeter (
             fail("Unknown provider for jmeter: ${provider}")
         }
     }
+
+    if $plugins {
+        class {'jmeter::install::plugins': }
+    }
 }
