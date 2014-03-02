@@ -1,5 +1,5 @@
 name 'backstop-jmeter'
-version '1.0.0'
+version '1.1.0'
 source 'git://github.com/backstop/puppet-jmeter.git'
 author 'Backstop Solutions'
 license 'Apache 2.0'
