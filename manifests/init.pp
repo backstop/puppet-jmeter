@@ -2,6 +2,8 @@
 class jmeter (
     $provider = $::jmeter::params::provider,
     $version  = $::jmeter::params::version,
+    $plugins  = false,
+    $plugins_version = $::jmeter::params::plugins_version,
 ) inherits jmeter::params {
     case $provider {
         tarball: {
