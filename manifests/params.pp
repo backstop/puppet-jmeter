@@ -2,5 +2,5 @@
 class jmeter::params {
     $provider = tarball
     $plugins_version = '1.1.3'
-    $version  = '2.11'
+    $version  = '2.12'
 }
