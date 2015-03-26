@@ -2,7 +2,7 @@
 class jmeter::install::tarball (
   $version,
 ) {
-  file { "/usr/local/apache-jmeter-${version}.tgz",
+  file { "/usr/local/apache-jmeter-${version}.tgz":
     source => "puppet:///bigfiles/jmeter/apache-jmeter-${version}.tgz",
   }
 
