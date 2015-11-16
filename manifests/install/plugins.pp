@@ -9,6 +9,7 @@ class jmeter::install::plugins {
   wget::fetch { 'plugins':
     source      => "http://jmeter-plugins.org/downloads/file/JMeterPlugins-Standard-${::jmeter::params::plugins_version}.zip",
     destination => "/root/JMeterPlugins-Standard-${::jmeter::params::plugins_version}.zip",
+    timeout     => 300,
     notify      => Exec['install-jmeter-plugins'],
   }
 
